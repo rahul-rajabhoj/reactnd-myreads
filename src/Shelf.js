@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class Shelves extends React.Component {
+class Shelf extends React.Component {
     render() {
         const { shelf, books } = this.props;
 
@@ -55,9 +55,9 @@ class Shelves extends React.Component {
     }
 }
 
-Shelves.propTypes = {
+Shelf.propTypes = {
     shelf: PropTypes.object.isRequired,
     books: PropTypes.array.isRequired
 }
 
-export default Shelves
+export default Shelf

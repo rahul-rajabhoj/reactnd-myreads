@@ -1,7 +1,7 @@
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
-import Shelves from './Shelves'
+import Shelf from './Shelf'
 
 class BooksApp extends React.Component {
   state = {
@@ -66,7 +66,7 @@ class BooksApp extends React.Component {
               <div>
                 { shelves.map( (shelf, index) => {
                   const shelfBooks = books.filter( book => book.shelf === shelf.value);
-                  return <Shelves 
+                  return <Shelf 
                     key={index}
                     shelf={shelf} 
                     books={shelfBooks}
