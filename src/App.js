@@ -25,12 +25,9 @@ class BooksApp extends React.Component {
     books: []
   };
 
-  getAllBooks = () => {
-    BooksAPI.getAll().then(booksData => {
-      this.setState((currentState) => ({
-        books: booksData
-      }))
-    })
+  getAllBooks = async () => {
+    const books = await BooksAPI.getAll(); 
+    this.setState({ books });
   }
 
   updateBookShelf = (book, shelf) => {
@@ -48,21 +45,21 @@ class BooksApp extends React.Component {
 
     return (
       <div className="app">
-        <Route exact path='/search' render={() => (
+        <Route exact path='/search'>
           <Search 
             shelfBooks={books}
             shelves={shelves}
             updateBookShelf={this.updateBookShelf}
           />
-        )} />
+        </Route>
 
-        <Route exact path='/' render={() => (
+        <Route exact path='/'>
           <Shelves
             books={books}
             shelves={shelves}
             updateBookShelf={this.updateBookShelf}
           />
-        )}/>
+        </Route>
       </div>
     )
   }

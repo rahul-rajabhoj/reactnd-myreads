@@ -9,8 +9,8 @@ class Books extends React.Component {
         return (
             <div className="bookshelf-books">
                 <ol className="books-grid">
-                    { books.map( (book, index) => (
-                        <li key={index}>
+                    { books.map( (book) => (
+                        <li key={book.id}>
                             <Book
                                 book={book}
                                 shelves={shelves}
