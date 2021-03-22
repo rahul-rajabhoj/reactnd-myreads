@@ -1,5 +1,5 @@
 import React from 'react'
-// import * as BooksAPI from './BooksAPI'
+import * as BooksAPI from './BooksAPI'
 import './App.css'
 import Shelves from './Shelves'
 
@@ -19,11 +19,20 @@ class BooksApp extends React.Component {
         value: 'read'
       }
     ],
+    books: [],
     showSearchPage: false
   }
 
+  componentDidMount() {
+    BooksAPI.getAll().then(booksData => {
+      this.setState((currentState) => ({
+        books: booksData
+      }))
+    })
+  }
+
   render() {
-    const { shelves } = this.state;
+    const { shelves, books } = this.state;
 
     return (
       <div className="app">
@@ -55,12 +64,14 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                { shelves.map( (shelve, index) => (
-                  <Shelves 
+                { shelves.map( (shelf, index) => {
+                  const shelfBooks = books.filter( book => book.shelf === shelf.value);
+                  return <Shelves 
                     key={index}
-                    shelve={shelve} 
+                    shelf={shelf} 
+                    books={shelfBooks}
                   />
-                ))}
+                })}
               </div>
             </div>
             <div className="open-search">

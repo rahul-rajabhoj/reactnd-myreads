@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 
 class Shelves extends React.Component {
     render() {
-        const { shelve } = this.props;
+        const { shelf, books } = this.props;
+
+        console.log(`${shelf.label} Shelf Books :`, books);
 
         return (
             <div className="bookshelf">
-                <h2 className="bookshelf-title">{ shelve.label }</h2>
+                <h2 className="bookshelf-title">{ shelf.label }</h2>
                 <div className="bookshelf-books">
                     <ol className="books-grid">
                         <li>
@@ -54,7 +56,8 @@ class Shelves extends React.Component {
 }
 
 Shelves.propTypes = {
-    shelve: PropTypes.object.isRequired
+    shelf: PropTypes.object.isRequired,
+    books: PropTypes.array.isRequired
 }
 
 export default Shelves
