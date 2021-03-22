@@ -9,14 +9,14 @@ class Book extends React.Component {
     }
 
     render() {
-        const { shelves, book, currentShelf } = this.props;
+        const { shelves, book } = this.props;
 
         return (
             <div className="book">
                 <div className="book-top">
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
                     <div className="book-shelf-changer">
-                        <select value={currentShelf.value} onChange={this.handleChange}>
+                        <select value={book.shelf} onChange={this.handleChange}>
                             <option value="move" disabled>Move to...</option>
                             { shelves.map((shelf,index) => (
                                 <option 
@@ -38,7 +38,6 @@ class Book extends React.Component {
 }
 
 Book.propTypes = {
-    currentShelf: PropTypes.object.isRequired,
     book: PropTypes.object.isRequired,
     shelves: PropTypes.array.isRequired,
     updateBookShelf: PropTypes.func.isRequired

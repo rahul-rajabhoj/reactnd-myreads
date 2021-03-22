@@ -1,30 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Book from './Book';
+import Books from './Books';
 
 class Shelf extends React.Component {
     render() {
-        const { shelf, books, shelves, updateBookShelf } = this.props;
+        const { shelf, shelfBooks, shelves, updateBookShelf } = this.props;
 
-        console.log(`${shelf.label} Shelf Books :`, books);
+        console.log(`${shelf.label} Shelf Books :`, shelfBooks);
 
         return (
             <div className="bookshelf">
                 <h2 className="bookshelf-title">{ shelf.label }</h2>
-                <div className="bookshelf-books">
-                    <ol className="books-grid">
-                        { books.map( (book, index) => (
-                            <li key={index}>
-                                <Book
-                                    currentShelf={shelf}
-                                    book={book}
-                                    shelves={shelves}
-                                    updateBookShelf={updateBookShelf}
-                                />
-                            </li>
-                        ))}
-                    </ol>
-                </div>
+                <Books
+                    books={shelfBooks}
+                    shelves={shelves}
+                    updateBookShelf={updateBookShelf}
+                />
             </div>
         )
     }
@@ -32,7 +23,7 @@ class Shelf extends React.Component {
 
 Shelf.propTypes = {
     shelf: PropTypes.object.isRequired,
-    books: PropTypes.array.isRequired,
+    shelfBooks: PropTypes.array.isRequired,
     shelves: PropTypes.array.isRequired,
     updateBookShelf: PropTypes.func.isRequired
 }
