@@ -1,7 +1,7 @@
-import React from 'react'
-import * as BooksAPI from './BooksAPI'
-import './App.css'
-import Shelf from './Shelf'
+import React from 'react';
+import * as BooksAPI from './BooksAPI';
+import './App.css';
+import Shelf from './Shelf';
 
 class BooksApp extends React.Component {
   state = {
@@ -21,15 +21,25 @@ class BooksApp extends React.Component {
     ],
     books: [],
     showSearchPage: false
-  }
+  };
 
-  componentDidMount() {
+  getAllBooks = () => {
     BooksAPI.getAll().then(booksData => {
       this.setState((currentState) => ({
         books: booksData
       }))
     })
   }
+
+  updateBookShelf = (book, shelf) => {
+    BooksAPI.update(book, shelf).then( data => {
+      this.getAllBooks();
+    })
+  }
+
+  componentDidMount() {
+    this.getAllBooks();
+  };
 
   render() {
     const { shelves, books } = this.state;
@@ -66,10 +76,12 @@ class BooksApp extends React.Component {
               <div>
                 { shelves.map( (shelf, index) => {
                   const shelfBooks = books.filter( book => book.shelf === shelf.value);
-                  return <Shelf 
+                  return shelfBooks.length > 0 && <Shelf 
                     key={index}
                     shelf={shelf} 
                     books={shelfBooks}
+                    shelves={shelves}
+                    updateBookShelf={this.updateBookShelf}
                   />
                 })}
               </div>
